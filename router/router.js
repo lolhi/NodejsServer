@@ -25,29 +25,20 @@ module.exports = function(app, fs)
   })//end app.get()
 
   app.get('/ShelterData', function(req,res){
-    //fs.readFile(__dirname + "/../data/ShelterData.json",'utf8',function(err,data){
-    //  var jsondata = JSON.parse(data);
-    //  res.status(200).json(jsondata.DATA);
-    //})//end readFile()
+    fs.readFile(__dirname + "/../data/ShelterData1.json",'utf8',function(err,data){
+      data = data + ']';
+      var jsondata = JSON.parse(data);
+      res.status(200).json(jsondata);
+    })//end readFile()
 
-    var request = require('request');
+  })//end app.get()
 
-    var url = 'http://apis.data.go.kr/1741000/EarthquakeIndoors/getEarthquakeIndoorsList';
-    var queryParams = '?' + encodeURIComponent('ServiceKey') + '=CFChzWsCjrGxW16mSq%2F9diy47VtyHqy8LDip17p%2BYdwmse88ft%2BePRJrfIyJHKIhWlqLJIMcQOtiI6hM7NQ1lQ%3D%3D'; /* Service Key*/
-    queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'); /* 페이지번호 */
-    queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('10'); /* 한 페이지 결과 수 */
-    queryParams += '&' + encodeURIComponent('type') + '=' + encodeURIComponent('json'); /* 호출문서 형식 */
-    queryParams += '&' + encodeURIComponent('flag') + '=' + encodeURIComponent('Y'); /* 신규API */
-
-    request({
-        url: url + queryParams,
-        method: 'GET'
-    }, function (error, response, body) {
-        console.log('Status', response.statusCode);
-        console.log('Headers', JSON.stringify(response.headers));
-        console.log('Reponse received', body);
-        res.status(200).json(body);
-    });
+app.get('/AEDData', function(req,res){
+    fs.readFile(__dirname + "/../data/AEDData.json",'utf8',function(err,data){
+      data = data + ']'; 
+      var jsondata = JSON.parse(data);
+      res.status(200).json(jsondata);
+    })//end readFile()
 
   })//end app.get()
 
